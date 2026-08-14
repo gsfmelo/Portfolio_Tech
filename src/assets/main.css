@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --bg: #F3F0E4;
+  --bg-alt: #EDE7D8;
+  --panel-green: #E8EEE6;
+  --card: #FFFFFF;
+  --border: #DDE6D9;
+  --border-soft: #C9BFA6;
+  --text-dark: #243B29;
+  --text-body: #4E6E52;
+  --text-muted: #6E8A73;
+  --green-1: #7CAE72;
+  --green-2: #5B8A57;
+  --green-3: #3E5C3A;
+  --terracota: #C97B4A;
+  --amber: #D9A441;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  font-family: 'Fredoka', sans-serif;
+  color: var(--text-dark);
+}
+
+.mono { 
+  font-family: 'JetBrains Mono', monospace; 
+}
+
+section { padding: 0; }
+.wrap { max-width: 980px; margin: 0 auto; padding: 0 3rem; }
+
+.eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; letter-spacing: 1px;
+  color: var(--green-2);
+  margin: 0 0 8px;
+}
+
+/* =========================================
+   UX & MICRO-INTERAÇÕES
+   ========================================= */
+
+/* Transições mais suaves e naturais para toda a página */
+* {
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Tipografia refinada */
+h1, h2, h3 {
+  letter-spacing: -0.02em; /* Deixa os títulos mais compactos e elegantes */
+}
+
+p {
+  letter-spacing: 0.01em;
+}
+
+/* O Scroll Reveal Mágico */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Efeito em cascata para itens próximos (badges, stack) */
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+/* =========================================
+   ESTILOS GLOBAIS: BOTÕES
+   ========================================= */
+.btn { 
+  font-family: 'Fredoka', sans-serif; font-size: 15px; font-weight: 500; 
+  border-radius: 8px; padding: 14px 28px; cursor: pointer; border: none; text-decoration: none; 
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.btn.primary { background: var(--green-2); color: var(--card); box-shadow: 0 4px 14px rgba(91, 138, 87, 0.2); }
+.btn.primary:hover { background: var(--green-3); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(62, 92, 58, 0.25); }
+.btn.ghost { background: transparent; color: var(--text-dark); border: 1.5px solid var(--border-soft); }
+.btn.ghost:hover { border-color: var(--text-dark); background: rgba(36, 59, 41, 0.03); transform: translateY(-2px); }
+
+/* =========================================
+   ESTILOS GLOBAIS: SCROLL REVEAL E ANIMAÇÕES
+   ========================================= */
+.reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1); }
+.reveal.active { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+.pagina-animada { animation: fadeIn 0.4s ease-in-out; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
