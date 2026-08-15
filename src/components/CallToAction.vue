@@ -39,8 +39,8 @@ const leaves = Array.from({ length: 15 }).map((_, i) => ({
 
       <!-- CONTEÚDO REAL DO CTA -->
       <div class="cta-content">
-        <h2>Pronta para cultivar novas ideias?</h2>
-        <p>Seja para discutir arquitetura de dados, planejar automações ou apenas trocar referências de tecnologia e cinema, minha estufa está de portas abertas.</p>
+        <h2>Pronto para cultivar novas ideias?</h2>
+        <p>Seja pra falar de novos projetos, QA, trocar ideia sobre UX/UI ou só compartilhar referências de tecnologia, minha estufa está de portas abertas.</p>
         <div class="btn-row">
           <RouterLink to="/contato" class="btn primary">Vamos conversar</RouterLink>
           <a href="/cv-geovanna-melo.pdf" download="CV_GeovannaMelo_Tech.pdf" target="_blank" class="btn ghost-light">Baixar currículo</a>

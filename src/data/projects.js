@@ -1,94 +1,129 @@
 export const projetos = [
   {
-    id: 'prontoplay',
-    titulo: 'ProntoPlay',
+    id: 'exercicios-logica',
+    titulo: 'Exercícios de Lógica de Programação',
+    estagio: 'broto',
+    tagEstagio: 'broto · python',
+    corDot: '#7CAE72',
+    descricaoCurta: 'Três exercícios da disciplina de Lógica de Programação',
+    detalhes: 'Conjunto de exercícios simples feitos em Python durante a disciplina de Lógica de Programação: cálculo de frete, sistema de lanchonete e cálculo de descontos em loja.',
+    stack: ['Python'],
+    features: [], // TODO: se quiser, pode listar 1-2 features de cada um aqui
+    codeSnippet: null, // TODO: opcional, escolher um trecho representativo
+    link: 'https://github.com/gsfmelo?tab=repositories&q=&type=public&language=&sort=',
+  },
+
+  {
+    id: 'lista-encadeada',
+    titulo: 'ListaEncadeada',
+    estagio: 'planta',
+    tagEstagio: 'planta · estrutura de dados',
+    corDot: '#5B8A57',
+    descricaoCurta: 'Fila de prioridade hospitalar com lista encadeada',
+    detalhes: 'Exercício do trabalho final da disciplina de Estrutura de Dados. Implementa uma lista encadeada para melhorar o atendimento de um hospital, priorizando casos urgentes.',
+    stack: ['Python'],
+    features: [], // TODO: completar com os detalhes reais da implementação
+    codeSnippet: null,
+    link: 'https://github.com/gsfmelo/ListaEncadeada',
+  },
+
+  {
+    id: 'tabela-hash',
+    titulo: 'TabelaHash',
+    estagio: 'planta',
+    tagEstagio: 'planta · estrutura de dados',
+    corDot: '#5B8A57',
+    descricaoCurta: 'Tabela hash com endereçamento em cadeia',
+    detalhes: 'Exercício do trabalho final da disciplina de Estrutura de Dados. Implementa uma tabela hash com endereçamento em cadeia para um sistema de emplacamento de veículos.',
+    stack: ['Python'],
+    features: [], // TODO
+    codeSnippet: null,
+    link: 'https://github.com/gsfmelo/TabelaHash',
+  },
+
+  {
+    id: 'cofrinho-moedas',
+    titulo: 'CofrinhoMoedas',
+    estagio: 'planta',
+    tagEstagio: 'planta · java · poo',
+    corDot: '#5B8A57',
+    descricaoCurta: 'Cofrinho simples com Programação Orientada a Objetos',
+    detalhes: 'Projeto feito em Java para o trabalho final da disciplina de Programação Orientada a Objetos.',
+    stack: ['Java'],
+    features: [], // TODO
+    codeSnippet: null,
+    link: 'https://github.com/gsfmelo/CofrinhoMoedas',
+  },
+
+  {
+    id: 'cadastro-de-alunos',
+    titulo: 'Cadastro de Alunos',
+    estagio: 'planta',
+    tagEstagio: 'planta · js · bootcamp',
+    corDot: '#5B8A57',
+    descricaoCurta: 'Atividade do bootcamp de backend da Cubos Academy',
+    detalhes: 'Projeto realizado como atividade prática no curso de Desenvolvimento Back-End da Cubos Academy.',
+    stack: ['JavaScript'],
+    features: [], // TODO
+    codeSnippet: null,
+    link: 'https://github.com/gsfmelo/cadastro-de-alunos',
+  },
+
+  {
+    id: 'jogo',
+    titulo: 'Jogo',
+    estagio: 'planta',
+    tagEstagio: 'planta · python',
+    corDot: '#5B8A57',
+    descricaoCurta: 'Trabalho final de disciplina',
+    detalhes: 'Jogo desenvolvido em Python como trabalho final de uma disciplina do curso de ADS.', // TODO: qual disciplina, e do que se trata o jogo?
+    stack: ['Python'],
+    features: [], // TODO
+    codeSnippet: null,
+    link: 'https://github.com/gsfmelo/Jogo',
+  },
+
+  {
+    id: 'portfolio-web-inicial',
+    titulo: 'Primeiro Portfólio',
+    estagio: 'planta',
+    tagEstagio: 'planta · css · desenvolvimento web',
+    corDot: '#5B8A57',
+    descricaoCurta: 'Meu primeiro portfólio, feito na disciplina de Desenvolvimento Web',
+    detalhes: 'Portfólio construído como trabalho final da disciplina de Desenvolvimento Web — a primeira vez que montei um site do zero.',
+    stack: ['HTML', 'CSS'],
+    features: [], // TODO
+    codeSnippet: null,
+    link: 'https://github.com/gsfmelo/portfolio-geovanna-melo',
+  },
+
+  {
+    id: 'sghss',
+    titulo: 'Projeto SGHSS',
     estagio: 'colheita',
-    tagEstagio: 'colheita · python',
+    tagEstagio: 'colheita · qa · projeto final',
     corDot: '#D9A441',
     destaque: true,
-    descricaoCurta: 'automação de mídia (MoviePy/FFmpeg)',
-    detalhes: 'Protótipo de software multimídia projetado para processar e otimizar vídeos de repórteres para as redes sociais. Unindo PAM (Production Asset Management) com engenharia de software, o sistema corta tempos de edição repetitiva drasticamente.',
-    stack: ['Python', 'MoviePy', 'OpenCV', 'FFmpeg', 'OS/Shutil'],
-    features: [
-      'Monitoramento automatizado de diretórios de entrada.',
-      'Processamento em lote (batch processing) de assets brutos.',
-      'Integração de metadados e conversão via FFmpeg.'
-    ],
-    codeSnippet: `def process_video_asset(filepath, output_dir):
-    try:
-        # Load the raw footage
-        clip = VideoFileClip(filepath)
-        
-        # Apply standard social media crop (9:16)
-        cropped_clip = clip.crop(x1=100, y1=0, x2=820, y2=1280)
-        
-        # Overlay standard watermark & export
-        final_asset = CompositeVideoClip([cropped_clip, watermark])
-        final_asset.write_videofile(f"{output_dir}/ready_to_publish.mp4", codec="libx264")
-        
-        return True
-    except Exception as e:
-        log_error("Asset processing failed", e)
-        return False`,
-    link: 'https://github.com/geovannamelo'
+    descricaoCurta: 'Sistema de Gestão Hospitalar com foco em Qualidade de Software',
+    detalhes: 'Projeto multidisciplinar final do curso de Análise e Desenvolvimento de Sistemas (UNINTER): um Sistema de Gestão Hospitalar e de Serviços de Saúde (SGHSS), com ênfase em Qualidade de Software. Inclui simulações de testes de software.',
+    stack: ['JavaScript'],
+    features: [], // TODO: detalhar os cenários de teste/simulação, já que QA é o coração desse projeto
+    codeSnippet: null,
+    link: 'https://github.com/gsfmelo/ProjetoFinalSGHSS',
   },
+
   {
-    id: 'women-in-cloud',
-    titulo: 'Women in Cloud / AWS',
-    estagio: 'planta',
-    tagEstagio: 'planta · nuvem',
-    corDot: '#7CAE72',
-    destaque: false,
-    descricaoCurta: 'infraestrutura e inteligência gerativa',
-    detalhes: 'Programa intensivo de formação em nuvem arquitetado pela AWS Academy, com foco em resiliência de dados, escalabilidade e aplicação de serviços gerenciados.',
-    stack: ['AWS EC2', 'S3', 'IAM', 'GenAI Concepts'],
-    features: [
-      'Provisionamento de infraestrutura escalável.',
-      'Gestão de políticas de acesso e segurança (IAM).',
-      'Exploração de APIs de inteligência generativa.'
-    ],
-    codeSnippet: `{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Action": "s3:ListBucket",
-      "Resource": "arn:aws:s3:::estufa-digital-assets"
-    },
-    {
-      "Effect": "Allow",
-      "Action": ["s3:GetObject", "s3:PutObject"],
-      "Resource": "arn:aws:s3:::estufa-digital-assets/producao/*"
-    }
-  ]
-}`,
-    link: 'https://github.com/geovannamelo'
-  },
-  {
-    id: 'decola-tech',
-    titulo: 'Decola Tech Avanade',
-    estagio: 'planta',
-    tagEstagio: 'planta · bootcamp',
-    corDot: '#5B8A57',
-    destaque: false,
-    descricaoCurta: 'imersão técnica e testes BDD',
-    detalhes: 'Bootcamp voltado ao ecossistema corporativo. Durante os desafios, o foco principal foi a implementação de lógicas complexas de backend aliadas a uma sólida cultura de testes.',
-    stack: ['BDD', 'Testes Unitários', 'SQL', 'Git Flow'],
-    features: [
-      'Criação de cenários de teste orientados a comportamento (BDD).',
-      'Modelagem de banco de dados relacional.',
-      'Resolução de problemas de lógica em maratona.'
-    ],
-    codeSnippet: `Feature: Video Asset Validation
-  As a content producer
-  I want the system to validate video formats
-  So that invalid files are rejected early
-  
-  Scenario: Uploading a valid MP4 file
-    Given the user selects the file "interview_raw.mp4"
-    When the system checks the file format
-    Then the status should be "ACCEPTED"
-    And the process pipeline is triggered`,
-    link: 'https://github.com/geovannamelo'
+    id: 'portfolio-audiovisual',
+    titulo: 'Portfólio de Audiovisual',
+    estagio: 'colheita',
+    tagEstagio: 'colheita · javascript · design',
+    corDot: '#D9A441',
+    destaque: true,
+    descricaoCurta: 'Meu portfólio de cinema e audiovisual',
+    detalhes: 'Portfólio dedicado à trajetória em cinema e audiovisual — identidade visual própria, construída com atenção especial ao design.',
+    stack: ['JavaScript'],
+    features: [], // TODO
+    codeSnippet: null,
+    link: 'https://github.com/gsfmelo/Portfolio_Audiovisual',
   }
 ];

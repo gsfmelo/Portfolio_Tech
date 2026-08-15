@@ -10,7 +10,7 @@ const projetosDestaque = computed(() => projetos.slice(0, 2))
 // NOVA LISTA DE BADGES: Para adicionar um novo, é só colocar aqui!
 const badges = [
   { 
-    nome: 'AWS', 
+    nome: 'SQL', 
     icone: '<ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.66 3.58 3 8 3s8-1.34 8-3V6"/><path d="M4 12v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/>' 
   },
   { 
@@ -40,8 +40,7 @@ const badges = [
           </h2>
 
           <p class="desc reveal reveal-delay-2">
-            Not your average software developer. Observo como cada parte de um sistema cresce
-            Especializada na construção de <strong>arquiteturas de dados escaláveis</strong> e automação de processos complexos. Com sólida base em <strong>Python</strong> e tecnologias de processamento de ponta a ponta, desenvolvo soluções com foco em performance, integração contínua e cultura de testes (BDD).
+            Not your average software developer. Observo como cada parte de um sistema cresce — e principalmente onde ela quebra. Construo com <strong>Python,Java, JavaScript e Node.js</strong>, com uma queda declarada por <strong>QA</strong>, organização e um olhar estético que não desliga (e é por isso que <strong>UX/UI</strong> também mora aqui).
           </p>
           <div class="btn-row reveal reveal-delay-3">
             <RouterLink to="/projetos" class="btn primary">Explorar projetos</RouterLink>
@@ -119,24 +118,29 @@ const badges = [
       <div class="exp-box">
         <div class="exp-left">
   <p class="eyebrow" style="color: var(--card);">foco de estudo & desenvolvimento</p>
-  <h3>Arquitetura de Dados e Automação Backend</h3>
+  <h3>Engenharia de Software, com um olho em QA</h3>
   <p>
-    Graduanda em Análise e Desenvolvimento de Sistemas (UNINTER). Minha rotina técnica é focada em desenhar pipelines de dados resilientes, construir automações em <strong>Python</strong> e orquestrar fluxos de informação utilizando ferramentas robustas como <strong>Apache Kafka</strong> e <strong>Spark SQL</strong>, sempre alicerçadas em testes unitários e de integração.
+    Graduanda em Análise e Desenvolvimento de Sistemas (UNINTER), com trilha voltada a <strong>Engenharia de Software</strong> e TCC sobre <strong>QA</strong>. Sou organizada por natureza — isso vaza para como penso interface. Gosto de sistemas estruturados e de <strong>UX/UI</strong>: qualidade não é só "funcionar", é como algo se comporta e se apresenta pra quem usa.
   </p>
+  <div class="exp-tags">
+    <span class="exp-tag">Engenharia de Software</span>
+    <span class="exp-tag">QA & Testes</span>
+    <span class="exp-tag">UX/UI</span>
+  </div>
 </div>
         <div class="exp-right">
           <ul class="mini-timeline">
             <li>
-              <span class="year mono">2026</span>
-              <span class="event">EY Empodera & Academia SAP ABAP</span>
+              <span class="year mono">2023-2026</span>
+              <span class="event">Análise e Desenvolvimento de Sistemas (UNINTER) </span>
             </li>
             <li>
-              <span class="year mono">2026</span>
-              <span class="event">Women in Cloud (AWS Academy)</span>
+              <span class="year mono">2023</span>
+              <span class="event">Desenvolvimento de Software com foco em Back-end (Cubos Academy)</span>
             </li>
             <li>
-              <span class="year mono">Atual</span>
-              <span class="event">Desenvolvimento do ProntoPlay (Automação AV)</span>
+              <span class="year mono">2025</span>
+              <span class="event">Hackathon: Produção de Conteúdo Inteligente Multiplataforma (Globo & Rec'N'Play)</span>
             </li>
           </ul>
         </div>
@@ -234,6 +238,34 @@ const badges = [
 .year { display: block; font-size: 12px; color: rgba(255,255,255,0.6); margin-bottom: 4px; }
 .event { font-size: 15px; font-weight: 500; }
 
+/* =========================================
+   BADGES DE INTERESSE (CAIXA VERDE)
+   ========================================= */
+.exp-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 2rem;
+}
+
+.exp-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  /* Fundo âmbar com 15% de opacidade */
+  background: rgba(217, 164, 65, 0.15); 
+  color: var(--amber);
+  border: 1px solid rgba(217, 164, 65, 0.3);
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.exp-tag:hover {
+  background: rgba(217, 164, 65, 0.25);
+  transform: translateY(-2px);
+}
 @media (max-width: 900px) { 
   .hero-grid { grid-template-columns: 1fr; text-align: center; } 
   .status-badge, .desc { margin: 0 auto 24px; } 
