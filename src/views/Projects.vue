@@ -1,34 +1,31 @@
 <script setup>
 import { ref, computed } from 'vue'
-import { projetos } from '../data/projects.js'
+import { projetos } from '../data/projects.js' // Corrigido para projetos.js (verifique se o nome do arquivo no seu projeto é esse mesmo)
 
 // ==========================================
-// 1. CONFIGURAÇÃO DAS COLUNAS
+// 1. CONFIGURAÇÃO DAS COLUNAS (Com descrições)
 // ==========================================
 const colunas = [
-  { id: 'broto', cor: '#7CAE72', label: 'broto' },
-  { id: 'planta', cor: '#5B8A57', label: 'planta' },
-  { id: 'colheita', cor: '#D9A441', label: 'colheita' }
+  { id: 'broto', cor: '#7CAE72', label: 'broto', desc: 'primeiros testes' },
+  { id: 'planta', cor: '#5B8A57', label: 'planta', desc: 'projeto completo' },
+  { id: 'colheita', cor: '#D9A441', label: 'colheita', desc: 'aplicado fora da sala' }
 ]
 
 // ==========================================
-// 2. LÓGICA DE FILTRAGEM (As tags no topo)
+// 2. LÓGICA DE FILTRAGEM
 // ==========================================
 const filtroAtual = ref('Todos')
 
-// Extrai todas as linguagens únicas do array de projetos para criar os botões dinamicamente
 const stacksUnicas = computed(() => {
   const todasStacks = projetos.flatMap(proj => proj.stack || [])
   return ['Todos', ...new Set(todasStacks)]
 })
 
-// Filtra a lista principal baseada no botão clicado
 const projetosFiltrados = computed(() => {
   if (filtroAtual.value === 'Todos') return projetos
   return projetos.filter(proj => proj.stack?.includes(filtroAtual.value))
 })
 
-// Distribui os projetos já filtrados para suas respectivas colunas
 const projetosPorColuna = (colunaId) => {
   return projetosFiltrados.value.filter(proj => proj.estagio === colunaId)
 }
@@ -40,7 +37,7 @@ const projetoAberto = ref(null)
 
 const abrirModal = (proj) => {
   projetoAberto.value = proj
-  document.body.style.overflow = 'hidden' // Impede o scroll da página no fundo
+  document.body.style.overflow = 'hidden'
 }
 
 const fecharModal = () => {
@@ -48,7 +45,6 @@ const fecharModal = () => {
   document.body.style.overflow = 'auto'
 }
 
-// Encontra a posição do projeto atual na lista filtrada para as setas de Próximo/Anterior
 const indexAtual = computed(() => {
   if (!projetoAberto.value) return -1
   return projetosFiltrados.value.findIndex(p => p.id === projetoAberto.value.id)
@@ -57,18 +53,14 @@ const indexAtual = computed(() => {
 const podeVoltar = computed(() => indexAtual.value > 0)
 const podeAvancar = computed(() => indexAtual.value >= 0 && indexAtual.value < projetosFiltrados.value.length - 1)
 
-const projetoAnterior = () => {
-  if (podeVoltar.value) projetoAberto.value = projetosFiltrados.value[indexAtual.value - 1]
-}
-
-const proximoProjeto = () => {
-  if (podeAvancar.value) projetoAberto.value = projetosFiltrados.value[indexAtual.value + 1]
-}
+const projetoAnterior = () => { if (podeVoltar.value) projetoAberto.value = projetosFiltrados.value[indexAtual.value - 1] }
+const proximoProjeto = () => { if (podeAvancar.value) projetoAberto.value = projetosFiltrados.value[indexAtual.value + 1] }
 </script>
 
 <template>
   <section class="pagina-projetos pagina-animada">
     
+    <!-- CABEÇALHO -->
     <div class="wrap header-projetos">
       <h1>Projetos</h1>
       <p class="lead">Um caminho de experimentos, do primeiro teste até o mais aplicado. Analise a evolução da estrutura por trás do código.</p>
@@ -91,13 +83,16 @@ const proximoProjeto = () => {
     <div class="wrap kanban-board">
       <div class="kanban-col" v-for="col in colunas" :key="col.id">
         
-        <!-- Cabeçalho invisível das colunas (mantendo o charme do design) -->
+        <!-- Cabeçalho explicativo da coluna (Substituiu a legenda antiga) -->
         <div class="col-header">
-          <span class="dot" :style="{ backgroundColor: col.cor }"></span>
-          <span class="col-label" :style="{ color: col.cor }">{{ col.label }}</span>
+          <div class="col-title-group">
+            <span class="dot" :style="{ backgroundColor: col.cor }"></span>
+            <span class="col-label" :style="{ color: col.cor }">{{ col.label }}</span>
+          </div>
+          <span class="col-desc">— {{ col.desc }}</span>
         </div>
         
-        <!-- Os cards que se ajustam à altura do conteúdo -->
+        <!-- Cards -->
         <div 
           class="k-card" 
           v-for="proj in projetosPorColuna(col.id)" 
@@ -116,18 +111,14 @@ const proximoProjeto = () => {
       </div>
     </div>
 
-    <!-- ==========================================
-         O MODAL SOBREPOSTO
-         ========================================== -->
+    <!-- MODAL SOBREPOSTO -->
     <transition name="fade">
       <div class="modal-overlay" v-if="projetoAberto" @click.self="fecharModal">
         
-        <!-- Botão de Voltar -->
         <button class="nav-btn prev-btn" @click="projetoAnterior" :disabled="!podeVoltar" aria-label="Projeto anterior">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
         </button>
 
-        <!-- Conteúdo do Modal -->
         <div class="modal-content">
           <div class="modal-header">
             <div class="modal-estagio">
@@ -149,7 +140,6 @@ const proximoProjeto = () => {
           </div>
         </div>
 
-        <!-- Botão de Avançar -->
         <button class="nav-btn next-btn" @click="proximoProjeto" :disabled="!podeAvancar" aria-label="Próximo projeto">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
         </button>
@@ -161,41 +151,40 @@ const proximoProjeto = () => {
 </template>
 
 <style scoped>
-.header-projetos { padding: 4rem 0 2rem; }
-.header-projetos h1 { font-size: 46px; font-weight: 800; margin: 0 0 16px; color: var(--text-dark); letter-spacing: -0.02em; }
-.header-projetos .lead { font-size: 16px; color: var(--text-body); max-width: 580px; line-height: 1.6; }
-
 /* =========================================
-   FILTROS
+   CABEÇALHO & FILTROS
    ========================================= */
-.filter-section { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 3rem; }
+.header-projetos { padding: 3rem 0 1.5rem; }
+.header-projetos h1 { font-size: 42px; font-weight: 800; margin: 0 0 12px; color: var(--text-dark); letter-spacing: -0.02em; }
+.header-projetos .lead { font-size: 15px; color: var(--text-body); max-width: 580px; line-height: 1.5; margin: 0; }
+
+.filter-section { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 2rem; }
 .filter-btn {
   background: transparent; border: 1.5px solid var(--border); border-radius: 20px;
-  padding: 6px 16px; font-family: 'JetBrains Mono', monospace; font-size: 12px;
+  padding: 5px 14px; font-family: 'JetBrains Mono', monospace; font-size: 11px;
   color: var(--text-muted); cursor: pointer; transition: all 0.2s ease;
 }
 .filter-btn:hover { border-color: var(--green-2); color: var(--green-3); }
 .filter-btn.ativo { background: var(--green-2); border-color: var(--green-2); color: var(--bg); }
 
 /* =========================================
-   KANBAN BOARD (Alturas independentes)
+   KANBAN BOARD & COLUNAS
    ========================================= */
-.kanban-board {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
-  align-items: start; /* Mágica que impede a coluna de esticar! */
-  margin-bottom: 6rem;
-}
+.kanban-board { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: start; margin-bottom: 6rem; }
 .kanban-col { display: flex; flex-direction: column; gap: 16px; }
 
-.col-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; padding-left: 4px; }
+.col-header { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; padding-left: 4px; }
+.col-title-group { display: flex; align-items: center; gap: 8px; }
 .col-header .dot { width: 8px; height: 8px; border-radius: 50%; }
-.col-header .col-label { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; }
+.col-header .col-label { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
+.col-desc { font-size: 12px; color: var(--text-muted); font-weight: 400; }
 
-/* CARDS */
+/* =========================================
+   CARDS
+   ========================================= */
 .k-card {
   background: var(--card); border-radius: 8px; padding: 16px 20px;
-  border-left: 4px solid; /* A cor vem dinamicamente do estilo inline */
-  box-shadow: 0 2px 8px rgba(0,0,0,0.03); cursor: pointer;
+  border-left: 4px solid; box-shadow: 0 2px 8px rgba(0,0,0,0.03); cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 .k-card:hover { transform: translateY(-3px); box-shadow: 0 8px 16px rgba(36, 59, 41, 0.06); }
@@ -215,13 +204,7 @@ const proximoProjeto = () => {
   display: flex; align-items: center; justify-content: center; gap: 20px;
   z-index: 1000; padding: 2rem;
 }
-
-.modal-content {
-  background: var(--bg); border-radius: 16px; padding: 2.5rem;
-  width: 100%; max-width: 500px; position: relative;
-  box-shadow: 0 24px 48px rgba(0,0,0,0.2);
-}
-
+.modal-content { background: var(--bg); border-radius: 16px; padding: 2.5rem; width: 100%; max-width: 500px; position: relative; box-shadow: 0 24px 48px rgba(0,0,0,0.2); }
 .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
 .modal-estagio { display: flex; align-items: center; gap: 8px; }
 .modal-estagio .dot { width: 8px; height: 8px; border-radius: 50%; }
@@ -236,7 +219,6 @@ const proximoProjeto = () => {
 
 .btn.full { display: block; text-align: center; width: 100%; padding: 14px; border-radius: 8px; }
 
-/* Setas de Navegação */
 .nav-btn {
   background: var(--card); border: none; border-radius: 50%;
   width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;
@@ -246,7 +228,6 @@ const proximoProjeto = () => {
 .nav-btn:hover:not(:disabled) { transform: scale(1.1); background: var(--panel-green); }
 .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
 
-/* Transição suave do Modal */
 .fade-enter-active, .fade-leave-active { transition: opacity 0.3s ease; }
 .fade-enter-from, .fade-leave-to { opacity: 0; }
 

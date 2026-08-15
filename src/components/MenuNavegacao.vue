@@ -24,7 +24,11 @@ const fecharMenu = () => {
 
 <template>
   <nav class="nav">
-    <RouterLink to="/" class="brand mono" @click="fecharMenu">estufa digital</RouterLink>
+    <!-- Marca com Tag de Identificação -->
+    <div class="brand-wrapper">
+      <RouterLink to="/" class="brand mono" @click="fecharMenu">estufa digital</RouterLink>
+      <span class="brand-badge mono">portfólio tech</span>
+    </div>
     
     <!-- Botão Sanduíche (Aparece apenas no mobile) -->
     <button class="hamburger" @click="toggleMenu" :class="{ 'is-active': menuAberto }" aria-label="Menu">
@@ -45,22 +49,52 @@ const fecharMenu = () => {
 
 <style scoped>
 .nav {
-  display: flex; justify-content: space-between; align-items: center;
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center;
   padding: 1.1rem 3rem;
   border-bottom: 1px solid var(--border);
-  position: sticky; top: 0; 
-  background: rgba(243,240,228,0.92); backdrop-filter: blur(6px);
+  position: sticky; 
+  top: 0; 
+  background: rgba(243,240,228,0.92); 
+  backdrop-filter: blur(6px);
   z-index: 100; 
 }
 
+/* =========================================
+   MARCA E BADGE
+   ========================================= */
+.brand-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 101; /* Fica acima do menu fullscreen mobile */
+}
+
 .nav .brand { 
-  font-weight: 600; font-size: 15px; 
-  color: var(--text-dark); text-decoration: none; 
+  font-weight: 600; 
+  font-size: 15px; 
+  color: var(--text-dark); 
+  text-decoration: none; 
   transition: color 0.2s;
-  z-index: 101; /* Fica acima do menu aberto */
 }
 .nav .brand:hover { color: var(--green-2); }
 
+.brand-badge {
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  background: var(--panel-green);
+  color: var(--green-3);
+  border: 1px solid var(--border-soft);
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+/* =========================================
+   LINKS DESKTOP
+   ========================================= */
 .nav .links { display: flex; gap: 28px; font-size: 14px; color: var(--text-body); }
 .nav .links a { color: inherit; text-decoration: none; transition: 0.2s; }
 .nav .links a:hover, .nav .links a.router-link-active { color: var(--text-dark); font-weight: 500; }
@@ -74,7 +108,7 @@ const fecharMenu = () => {
   border: none;
   cursor: pointer;
   padding: 8px 0 8px 8px;
-  z-index: 101; /* Fica acima da tela do menu aberto */
+  z-index: 101;
 }
 
 .hamburger .line {
@@ -96,6 +130,11 @@ const fecharMenu = () => {
   .nav { padding: 1rem 1.4rem; }
   
   .hamburger { display: block; }
+  
+  .brand-badge {
+    font-size: 9px;
+    padding: 2px 6px;
+  }
   
   /* O menu vira uma tela inteira que desliza da direita */
   .nav .links {
