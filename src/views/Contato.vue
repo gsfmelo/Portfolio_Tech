@@ -1,6 +1,38 @@
 <script setup>
+import { ref, computed } from 'vue'
 import { useScrollReveal } from '../composables/useScrollReveal'
 useScrollReveal(0.15)
+
+// ==========================================
+// LÓGICA DO EASTER EGG (VASINHO)
+// ==========================================
+const planted = ref(false)
+const plantProgress = ref(0)
+const hintText = ref('clique no vaso para plantar')
+
+const plantSeed = () => {
+  if (planted.value) return // Se já plantou, não faz nada
+  
+  planted.value = true
+  hintText.value = 'semente plantada! 🌱'
+  
+  let t = 0
+  const interval = setInterval(() => {
+    t += 0.05
+    if (t >= 1) {
+      t = 1
+      clearInterval(interval)
+      hintText.value = 'obrigada por cuidar da semente 🌸'
+    }
+    plantProgress.value = t
+  }, 40)
+}
+
+// Cálculos reativos baseados no progresso de 0 a 1
+const stemHeight = computed(() => plantProgress.value * 45)
+const flowerScale = computed(() => Math.max(0, (plantProgress.value - 0.6) / 0.4))
+const flowerRadius = computed(() => 5 + flowerScale.value * 8)
+const flowerColor = computed(() => flowerScale.value > 0.05 ? '#D9A441' : '#7CAE72')
 </script>
 
 <template>
@@ -12,7 +44,9 @@ useScrollReveal(0.15)
     </div>
 
     <div class="wrap contact-grid">
+      <!-- LADO ESQUERDO: Links e Easter Egg -->
       <div class="contact-info reveal reveal-delay-1">
+        
         <div class="contact-links">
           <a href="mailto:geovanna@email.com"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5B8A57" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>geovanna@email.com</a>
           <a href="https://linkedin.com/in/geovannamelo" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5B8A57" stroke-width="1.8"><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/><path d="M10 9v12M10 13a4 4 0 0 1 8 0v8"/></svg>linkedin.com/in/geovannamelo</a>
@@ -20,22 +54,24 @@ useScrollReveal(0.15)
         </div>
         
         <div class="contact-visual">
-          <svg width="180" height="180" viewBox="0 0 150 150">
-            <ellipse cx="75" cy="130" rx="55" ry="8" fill="#E0D6B8" opacity="0.6"/>
-            <rect x="45" y="100" width="60" height="34" rx="6" fill="#C97B4A"/>
-            <path d="M45 100 L105 100 L98 84 L52 84 Z" fill="#B36A3B"/>
-            <line x1="75" y1="100" x2="75" y2="46" stroke="#3E5C3A" stroke-width="4" stroke-linecap="round"/>
-            <line x1="75" y1="80" x2="52" y2="66" stroke="#3E5C3A" stroke-width="3" stroke-linecap="round"/>
-            <line x1="75" y1="65" x2="100" y2="52" stroke="#3E5C3A" stroke-width="3" stroke-linecap="round"/>
-            <circle cx="75" cy="40" r="16" fill="#5B8A57"/>
-            <circle cx="50" cy="60" r="11" fill="#7CAE72"/>
-            <circle cx="102" cy="46" r="11" fill="#7CAE72"/>
-            <circle cx="60" cy="30" r="8" fill="#D9A441"/>
-            <circle cx="92" cy="26" r="7" fill="#D9A441"/>
-          </svg>
+          <div class="easter-egg-pot" @click="plantSeed" :class="{ 'is-planted': planted }">
+            <svg width="110" height="130" viewBox="0 0 90 110">
+              <!-- A planta que cresce dinamicamente -->
+              <g transform="translate(45,70)" v-if="plantProgress > 0">
+                <line x1="0" y1="0" x2="0" :y2="-stemHeight" stroke="#5B8A57" stroke-width="3" stroke-linecap="round"/>
+                <circle cx="0" :cy="-stemHeight" :r="flowerRadius" :fill="flowerColor"/>
+              </g>
+              <!-- O Vaso -->
+              <path d="M25 70 L65 70 L58 100 L32 100 Z" fill="#C97B4A"/>
+              <path d="M25 70 L65 70 L60 60 L30 60 Z" fill="#B36A3B"/>
+            </svg>
+            <p class="pot-hint mono">{{ hintText }}</p>
+          </div>
         </div>
+
       </div>
 
+      <!-- LADO DIREITO: Formulário -->
       <div class="contact-form-wrapper reveal reveal-delay-2">
         <form action="https://formspree.io/f/SEU_CODIGO_AQUI" method="POST" class="contact-form">
           <div class="form-group">
@@ -50,7 +86,6 @@ useScrollReveal(0.15)
             <label for="message">Mensagem</label>
             <textarea id="message" name="message" rows="5" placeholder="Me conte sobre a sua ideia ou projeto..." required></textarea>
           </div>
-          <!-- O Botão se aproveita das classes globais de main.css -->
           <button type="submit" class="btn primary submit-btn">
             Enviar mensagem
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
@@ -68,11 +103,57 @@ useScrollReveal(0.15)
 .contact-hero .lead { font-size: 17px; line-height: 1.7; max-width: 600px; color: var(--text-body); margin: 0; }
 
 .contact-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 60px; align-items: start; }
+
+/* Links de Contato */
 .contact-links { display: flex; flex-direction: column; gap: 16px; margin-bottom: 3rem; }
 .contact-links a { color: var(--text-dark); text-decoration: none; font-size: 15px; font-weight: 500; display: inline-flex; align-items: center; gap: 12px; transition: 0.2s; padding: 12px 20px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; }
 .contact-links a:hover { color: var(--green-3); border-color: var(--green-2); box-shadow: 0 6px 16px rgba(91, 138, 87, 0.08); transform: translateX(4px); }
+
+/* =========================================
+   ESTILOS DO VASINHO (EASTER EGG)
+   ========================================= */
 .contact-visual { display: flex; justify-content: center; }
 
+.easter-egg-pot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--panel-green);
+  border: 2px dashed #B3C7AE;
+  border-radius: 20px;
+  padding: 2.5rem 2rem 1.5rem;
+  cursor: pointer;
+  width: 100%;
+  max-width: 280px;
+  transition: all 0.3s ease;
+}
+
+.easter-egg-pot:hover {
+  transform: translateY(-4px);
+  background: #E1E8DE;
+  border-color: var(--green-2);
+}
+
+.easter-egg-pot.is-planted {
+  cursor: default; /* Remove o cursor de clique depois de plantado */
+}
+.easter-egg-pot.is-planted:hover {
+  transform: translateY(0);
+  background: var(--panel-green);
+  border-color: #B3C7AE;
+}
+
+.pot-hint {
+  margin-top: 1rem;
+  font-size: 11px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* =========================================
+   FORMULÁRIO (MANTIDO)
+   ========================================= */
 .contact-form-wrapper { background: var(--card); padding: 3rem; border-radius: 20px; border: 1px solid var(--border); box-shadow: 0 20px 40px rgba(36, 59, 41, 0.05); }
 .form-group { margin-bottom: 1.5rem; }
 .form-group label { display: block; font-size: 13px; font-weight: 600; color: var(--green-3); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
@@ -82,6 +163,12 @@ useScrollReveal(0.15)
 
 .submit-btn { width: 100%; margin-top: 1rem; font-size: 16px; padding: 16px; gap: 10px; }
 
-@media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; gap: 40px; } .contact-links { flex-direction: row; flex-wrap: wrap; justify-content: center; } .contact-visual { display: none; } }
-@media (max-width: 600px) { .contact-links { flex-direction: column; } .contact-form-wrapper { padding: 2rem 1.5rem; } }
+@media (max-width: 900px) { 
+  .contact-grid { grid-template-columns: 1fr; gap: 40px; } 
+  .contact-links { flex-direction: row; flex-wrap: wrap; justify-content: center; } 
+}
+@media (max-width: 600px) { 
+  .contact-links { flex-direction: column; } 
+  .contact-form-wrapper { padding: 2rem 1.5rem; } 
+}
 </style>

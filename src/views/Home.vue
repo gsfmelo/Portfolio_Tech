@@ -5,8 +5,23 @@ import { projetos } from '../data/projects.js'
 
 useScrollReveal(0.1)
 
-// Puxamos os 2 primeiros projetos para exibir como destaque na Home
 const projetosDestaque = computed(() => projetos.slice(0, 2))
+
+// NOVA LISTA DE BADGES: Para adicionar um novo, é só colocar aqui!
+const badges = [
+  { 
+    nome: 'AWS', 
+    icone: '<ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.66 3.58 3 8 3s8-1.34 8-3V6"/><path d="M4 12v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/>' 
+  },
+  { 
+    nome: 'Figma', 
+    icone: '<path d="M12 2a5 5 0 0 0-5 5v10a5 5 0 0 0 5 5V2z"/><path d="M12 2a5 5 0 0 1 5 5 5 5 0 0 1-5 5"/>' 
+  },
+  { 
+    nome: 'Git', 
+    icone: '<circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="12" r="2.5"/><path d="M6 8.5v7M8.2 6.8 15.8 10.8M8.2 17.2 15.8 13.2"/>' 
+  }
+]
 </script>
 
 <template>
@@ -17,14 +32,16 @@ const projetosDestaque = computed(() => projetos.slice(0, 2))
       <div class="hero-grid">
         <div class="hero-content">
           <div class="status-badge reveal reveal-delay-1">
-            <span class="pulse"></span> 📍 Olinda, PE · Disponível para projetos
+            <span class="pulse"></span> 📍 Recife, PE · Disponível para projetos
           </div>
           <h1 class="reveal reveal-delay-1">Geovanna Melo</h1>
-          <h2 class="dynamic-subtitle reveal reveal-delay-2">
-            Desenvolvedora <span class="amp">&</span> Engenheira de Dados em formação.
+          <h2 class="role reveal reveal-delay-1">
+            <span class="amp">Desenvolvedora de Software Júnior</span>
           </h2>
-          <p class="desc reveal reveal-delay-3">
-            Trago a visão macro da direção audiovisual para a lógica rigorosa da tecnologia. Construo <strong>arquiteturas de dados escaláveis</strong>, automações e aplico testes (BDD) para resolver problemas complexos.
+
+          <p class="desc reveal reveal-delay-2">
+            Not your average software developer. Observo como cada parte de um sistema cresce
+            Especializada na construção de <strong>arquiteturas de dados escaláveis</strong> e automação de processos complexos. Com sólida base em <strong>Python</strong> e tecnologias de processamento de ponta a ponta, desenvolvo soluções com foco em performance, integração contínua e cultura de testes (BDD).
           </p>
           <div class="btn-row reveal reveal-delay-3">
             <RouterLink to="/projetos" class="btn primary">Explorar projetos</RouterLink>
@@ -45,67 +62,68 @@ const projetosDestaque = computed(() => projetos.slice(0, 2))
     </div>
 
     <!-- 2. BADGES: Os itens coletados -->
+    <!-- 2. BADGES: Os itens coletados -->
     <div class="wrap badges reveal reveal-delay-2">
       <p class="eyebrow" style="color:#8A6A34;">itens coletados</p>
+      
       <div class="badge-container">
-        <div class="badge-item">
-          <svg class="badge-slot-icon" viewBox="0 0 24 24" fill="none" stroke="#C97B4A" stroke-width="1.8"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.66 3.58 3 8 3s8-1.34 8-3V6"/><path d="M4 12v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/></svg>
-          <span>AWS</span>
+        
+        <!-- O Vue vai repetir essa div para cada badge na nossa lista -->
+        <div class="badge-item" v-for="badge in badges" :key="badge.nome">
+          <svg class="badge-slot-icon" viewBox="0 0 24 24" fill="none" stroke="#C97B4A" stroke-width="1.8" v-html="badge.icone"></svg>
+          <span>{{ badge.nome }}</span>
         </div>
-        <div class="badge-item">
-          <svg class="badge-slot-icon" viewBox="0 0 24 24" fill="none" stroke="#C97B4A" stroke-width="1.8"><path d="M12 2a5 5 0 0 0-5 5v10a5 5 0 0 0 5 5V2z"/><path d="M12 2a5 5 0 0 1 5 5 5 5 0 0 1-5 5"/></svg>
-          <span>Figma</span>
-        </div>
-        <div class="badge-item">
-          <svg class="badge-slot-icon" viewBox="0 0 24 24" fill="none" stroke="#C97B4A" stroke-width="1.8"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="12" r="2.5"/><path d="M6 8.5v7M8.2 6.8 15.8 10.8M8.2 17.2 15.8 13.2"/></svg>
-          <span>Git</span>
-        </div>
+        
+        <!-- O card de "vazio/adicionar" continua fixo no final -->
         <div class="badge-item empty">
-          <svg class="badge-slot-icon" viewBox="0 0 24 24" fill="none" stroke="#B3C7AE" stroke-width="1.8"><path d="M12 5v14M5 12h14"/></svg>
+          <svg class="badge-slot-icon" viewBox="0 0 24 24" fill="none" stroke="#B3C7AE" stroke-width="1.8">
+            <path d="M12 5v14M5 12h14"/>
+          </svg>
         </div>
+        
       </div>
     </div>
 
-    <!-- ==========================================
-         NOVAS SEÇÕES INCLUÍDAS ABAIXO DO HERO
-         ========================================== -->
+      <!-- ==========================================
+          NOVAS SEÇÕES INCLUÍDAS ABAIXO DO HERO
+          ========================================== -->
 
-    <!-- 3. PROJETOS EM DESTAQUE -->
-    <div class="wrap featured-section reveal reveal-delay-2">
-      <div class="section-header">
-        <div>
-          <p class="eyebrow">no canteiro</p>
-          <h2>Colheitas Recentes</h2>
+      <!-- 3. PROJETOS EM DESTAQUE -->
+      <div class="wrap featured-section reveal reveal-delay-2">
+        <div class="section-header">
+          <div>
+            <p class="eyebrow">no canteiro</p>
+            <h2>Colheitas Recentes</h2>
+          </div>
+          <RouterLink to="/projetos" class="link-more">Ver todos ↗</RouterLink>
         </div>
-        <RouterLink to="/projetos" class="link-more">Ver todos ↗</RouterLink>
-      </div>
 
-      <div class="featured-grid">
-        <div v-for="projeto in projetosDestaque" :key="projeto.id" class="featured-card">
-          <div class="card-header">
-            <span class="proj-dot" :style="{ background: projeto.corDot }"></span>
-            <span class="stage mono">{{ projeto.tagEstagio }}</span>
-          </div>
-          <h3>{{ projeto.titulo }}</h3>
-          <p>{{ projeto.descricaoCurta }}</p>
-          
-          <div class="card-stack" v-if="projeto.stack">
-            <span v-for="(tech, index) in projeto.stack.slice(0, 3)" :key="index" class="stack-tag">{{ tech }}</span>
+        <div class="featured-grid">
+          <div v-for="projeto in projetosDestaque" :key="projeto.id" class="featured-card">
+            <div class="card-header">
+              <span class="proj-dot" :style="{ background: projeto.corDot }"></span>
+              <span class="stage mono">{{ projeto.tagEstagio }}</span>
+            </div>
+            <h3>{{ projeto.titulo }}</h3>
+            <p>{{ projeto.descricaoCurta }}</p>
+            
+            <div class="card-stack" v-if="projeto.stack">
+              <span v-for="(tech, index) in projeto.stack.slice(0, 3)" :key="index" class="stack-tag">{{ tech }}</span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
     <!-- 4. FOCO ATUAL / EXPERIÊNCIA -->
     <div class="wrap experience-section reveal reveal-delay-3">
       <div class="exp-box">
         <div class="exp-left">
-          <p class="eyebrow" style="color: var(--card);">foco de estudo & trabalho</p>
-          <h3>Engenharia de Dados e Automação de Processos</h3>
-          <p>
-            Atualmente graduanda em Análise e Desenvolvimento de Sistemas (UNINTER), com vivência prática em gestão de ativos digitais. Minha rotina envolve desenhar lógicas em <strong>Python</strong> e orquestrar dados com <strong>Kafka</strong> e <strong>SQL</strong>.
-          </p>
-        </div>
+  <p class="eyebrow" style="color: var(--card);">foco de estudo & desenvolvimento</p>
+  <h3>Arquitetura de Dados e Automação Backend</h3>
+  <p>
+    Graduanda em Análise e Desenvolvimento de Sistemas (UNINTER). Minha rotina técnica é focada em desenhar pipelines de dados resilientes, construir automações em <strong>Python</strong> e orquestrar fluxos de informação utilizando ferramentas robustas como <strong>Apache Kafka</strong> e <strong>Spark SQL</strong>, sempre alicerçadas em testes unitários e de integração.
+  </p>
+</div>
         <div class="exp-right">
           <ul class="mini-timeline">
             <li>
