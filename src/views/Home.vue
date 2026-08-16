@@ -118,7 +118,7 @@ const badges = [
       <div class="section-header">
         <div>
           <p class="eyebrow">no canteiro</p>
-          <h2>Colheitas Recentes</h2>
+          <h2>Projetos em Destaque</h2>
         </div>
         <RouterLink to="/projetos" class="link-more">Ver todos ↗</RouterLink>
       </div>

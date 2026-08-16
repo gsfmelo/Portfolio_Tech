@@ -2,7 +2,7 @@
   <section class="pagina-animada error-page">
     <div class="wrap error-content">
       <div class="error-visual">
-        <svg width="160" height="160" viewBox="0 0 150 150">
+        <svg viewBox="0 0 150 150">
           <!-- Vaso quebrado -->
           <path d="M40 100 L110 100 L102 70 L70 85 L65 70 L48 70 Z" fill="#C97B4A"/>
           <path d="M70 85 L85 100" stroke="#F3F0E4" stroke-width="3"/>
@@ -40,11 +40,19 @@
   flex-direction: column;
   align-items: center;
   max-width: 500px;
+  /* Garantindo padding lateral independentemente do .wrap global */
+  padding: 0 1.5rem; 
 }
 
 .error-visual {
   margin-bottom: 2rem;
   animation: float 5s ease-in-out infinite;
+}
+
+/* Deixei o SVG responsivo removendo o width/height fixos da tag HTML */
+.error-visual svg {
+  width: 160px;
+  height: 160px;
 }
 
 @keyframes float {
@@ -85,5 +93,29 @@ h1 {
   background: var(--green-3);
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(62, 92, 58, 0.25);
+}
+
+/* =========================================
+   RESPONSIVIDADE (MOBILE)
+   ========================================= */
+@media (max-width: 600px) {
+  .error-page {
+    min-height: 60vh;
+    padding: 3rem 0;
+  }
+
+  .error-visual svg {
+    width: 120px; /* Reduzindo a ilustração no mobile */
+    height: 120px;
+  }
+
+  h1 {
+    font-size: 32px; /* Fonte ajustada para não quebrar a tela */
+  }
+
+  .desc {
+    font-size: 15px;
+    margin: 0 0 2rem;
+  }
 }
 </style>

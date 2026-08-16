@@ -2,7 +2,7 @@
   <footer class="estufa-footer">
     <div class="wrap footer-content">
       
-      <p class="signature">feito com cultivo, código e um pouco de curiosidade.</p>
+      <p class="signature">feito com carinho, código e muita curiosidade.</p>
       
       <div class="footer-links">
         <a href="https://github.com/gsfmelo" target="_blank">GitHub</a>
@@ -10,7 +10,7 @@
         <a href="mailto:gsfmelo@gmail.com">E-mail</a>
       </div>
       
-      <p class="copyright mono">© 2026 Geovanna Melo.</p>
+      <p class="copyright mono">© 2026 Geovanna Melo</p>
       
     </div>
   </footer>
