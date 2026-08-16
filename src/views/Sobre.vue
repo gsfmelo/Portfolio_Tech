@@ -152,7 +152,7 @@ onUnmounted(() => {
             <span class="tag">Node.js</span><span class="tag">Express.js</span><span class="tag">SQL</span>
             <span class="tag">PostgreSQL</span><span class="tag">MySQL</span><span class="tag">REST API</span>
             <span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">Figma</span>
-            <span class="tag">MoviePy</span><span class="tag">OpenCV</span><span class="tag">FFmpeg</span>
+            <span class="tag">Next.js</span><span class="tag">OpenCV</span><span class="tag">FFmpeg</span>
           </div>
         </div>
         
