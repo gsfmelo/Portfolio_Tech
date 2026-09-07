@@ -1,38 +1,42 @@
-# estufa-digital
+# 🌿 Estufa Digital | Portfólio Tech
 
-This template should help get you started developing with Vue 3 in Vite.
+Bem-vindo(a) ao repositório do meu portfólio. Este projeto foi arquitetado não apenas para exibir trabalhos, mas para aplicar o conceito de uma **Estufa Digital**: um ambiente onde ideias são sementes, o desenvolvimento é o cultivo e os projetos finalizados são as colheitas.
 
-## Recommended IDE Setup
+🔗 **[Visite a Estufa Digital (Live na Vercel)](https://geovannamelotech.vercel.app/)**
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+![Preview do Portfólio](https://geovannamelotech.vercel.app/og-image.png)
 
-## Recommended Browser Setup
+---
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+## 💡 O Projeto
 
-## Customize configuration
+Construído com um olhar atento à **Qualidade de Software (QA)** e **UX/UI**, o portfólio utiliza um design minimalista, paleta em tons de terracota e verde, e layouts responsivos para garantir a melhor experiência em qualquer dispositivo.
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+A lógica de exibição de projetos é totalmente dinâmica, alimentada por um sistema de dados centralizado que filtra e ordena os trabalhos automaticamente com base em suas datas e estágios de desenvolvimento.
 
-## Project Setup
+## 🛠️ Tecnologias e Ferramentas
 
-```sh
-npm install
-```
+O ecossistema escolhido para este cultivo:
 
-### Compile and Hot-Reload for Development
+*   **Vue.js 3** (Composition API)
+*   **Vite** (Build tool super rápida)
+*   **Vue Router** (Navegação SPA fluida)
+*   **CSS3 Vanilla** (Variáveis CSS, CSS Grid/Flexbox, animações e Glassmorphism)
+*   **Formspree** (Integração de formulário de contato)
+*   **Vercel** (CI/CD e Deploy)
 
-```sh
-npm run dev
-```
+## ✨ Principais Funcionalidades
 
-### Compile and Minify for Production
+*   **Vitrine Dinâmica:** A página inicial puxa automaticamente as duas "colheitas" (projetos) mais recentes do banco de dados local.
+*   **Filtros de Projetos:** Separação entre projetos finalizados e em andamento.
+*   **Scroll Reveal & Animações:** Interações sutis que guiam o olhar do usuário sem sobrecarregar a interface.
+*   **SEO Otimizado:** Implementação de Open Graph tags (OG) para links ricos nas redes sociais.
+*   **Tratamento de Rotas:** Página de Erro 404 personalizada mantendo a imersão na identidade visual.
 
-```sh
-npm run build
-```
+## 🚀 Como rodar localmente
+
+Se você quiser clonar este canteiro para inspecionar o código, siga os passos:
+
+1. Clone o repositório:
+```bash
+git clone [https://github.com/gsfmelo/Portfolio_Tech.git](https://github.com/gsfmelo/Portfolio_Tech.git)
