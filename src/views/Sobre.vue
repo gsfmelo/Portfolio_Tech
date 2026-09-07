@@ -207,7 +207,7 @@ onUnmounted(() => {
           <div class="parenthetical">(sorrindo)</div>
           <div class="dialogue">A cena principal agora é essa: tech. Mas tem um corte anterior, onde eu dirigia de verdade. Bastidores aqui.</div>
           <div class="action-center">
-            <a href="https://portfolio-audiovisual-ten.vercel.app/" target="_blank" class="btn ghost">ACESSAR PORTFÓLIO AV ↗</a>
+            <a href="https://geovannamelo.vercel.app/" target="_blank" class="btn ghost">ACESSAR PORTFÓLIO AV ↗</a>
           </div>
         </div>
       </div>
